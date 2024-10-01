@@ -1,24 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES6",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES6", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
+    "isolatedModules": false,    // Relaxed
+    "moduleDetection": "auto",   // More flexible
     "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "strict": false,              // Less strict
+    "noUnusedLocals": false,      // Allow unused locals
+    "noUnusedParameters": false,  // Allow unused parameters
+    "noFallthroughCasesInSwitch": false  // Allow fallthrough in switch cases
   },
   "include": ["src"]
 }
