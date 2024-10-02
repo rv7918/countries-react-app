@@ -1,4 +1,4 @@
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <>
       <nav className="navbar navbar-light bg-light">

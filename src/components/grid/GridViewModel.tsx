@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { getCountries } from "./GridModel";
 import GridViewList from "./GridViewList";
+import { Country } from "./Grid.interface";
 
-const GridViewModel = () => {
-  const [gridData, setGridData] = useState([]);
+const GridViewModel: React.FC = () => {
+  const [gridData, setGridData] = useState<Country[]>([]);
 
   const getData = async () => {
     const tableData = await getCountries();
