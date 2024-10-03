@@ -1,17 +1,26 @@
 import { Country } from "../Grid.interface";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const GridDetail: React.FC<{
   rowData: Country;
   close: boolean;
   setClose: (close: boolean) => void;
 }> = ({ rowData: rowData, close: close, setClose: setClose }) => {
+  // const [favArray, setFavArray] = useState([])
+  const [addedItems, setAddedItems] = useState([]);
+
+  const addFavourites = () => {
+    addedItems?.unshift(rowData);
+    localStorage.setItem("favourites", JSON.stringify(addedItems));
+  };
+
   useEffect(() => {
     setClose(true);
+    const storedItems = JSON.parse(localStorage.getItem("favourites")) ?? [];
+    setAddedItems(storedItems);
   }, [setClose]);
 
   return (
     <>
-      {console.log(rowData)}
       <div className="card mt-5 mb-5" style={{ height: "200px" }}>
         {close && (
           <div className="alert alert-light text-center" role="alert">
@@ -42,7 +51,8 @@ const GridDetail: React.FC<{
               <div className="col-md-2 float-right">
                 <button
                   className="btn btn-primary "
-                  onClick={() => setClose(true)}
+                  onClick={addFavourites}
+                  disabled={addedItems?.includes(rowData)}
                 >
                   Favourite
                 </button>
