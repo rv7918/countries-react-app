@@ -9,9 +9,9 @@ const GridDetail: React.FC<{
   const { addedItems, setAddedItems } = useContext(DataContext);
 
   const addFavourites = () => {
-    const updatedItem = [rowData, ...addedItems]; // Create a new array with the new item added
-    setAddedItems(updatedItem); // Update the state
-    localStorage.setItem("favourites", JSON.stringify(updatedItem)); // Sync to localStorage
+    const updatedItem = [rowData, ...addedItems];
+    setAddedItems(updatedItem);
+    localStorage.setItem("favourites", JSON.stringify(updatedItem));
   };
 
   useEffect(() => {
