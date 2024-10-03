@@ -2,6 +2,7 @@ import { Country } from "../Grid.interface";
 import { useEffect, useContext, useState } from "react";
 import { DataContext } from "../../../context/DataContext";
 import { useLocation } from "react-router-dom";
+import styles from "./GridDetail.module.css";
 
 const GridDetail: React.FC<{
   rowData: Country;
@@ -46,9 +47,9 @@ const GridDetail: React.FC<{
 
   return (
     <>
-      <div className="card mt-5 mb-5" style={{ height: "200px" }}>
+      <div className={`${styles?.cardBackground} card mt-5 mb-5`}>
         {close && (
-          <div className="alert alert-light text-center" role="alert">
+          <div className="alert alert-dark text-center" role="alert">
             Click on a country for more details!
           </div>
         )}
