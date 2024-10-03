@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   const { addedItems } = useContext(DataContext);
@@ -15,18 +16,22 @@ const Header: React.FC = () => {
 
           {/* Right side: Buttons */}
           <div>
-            <button
-              className="btn btn-primary btn-sm"
-              style={{ marginRight: "10px" }}
-            >
-              Search
-            </button>
-            <button className="btn btn-primary position-relative btn-sm">
-              Favourites
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {addedItems?.length}
-              </span>
-            </button>
+            <Link to={"/search"}>
+              <button
+                className="btn btn-primary btn-sm"
+                style={{ marginRight: "10px" }}
+              >
+                Search
+              </button>
+            </Link>
+            <Link to={"/favourites"}>
+              <button className="btn btn-primary position-relative btn-sm">
+                Favourites
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {addedItems?.length}
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
       </nav>
