@@ -1,10 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 
 const Favourites = () => {
   const { addedItems } = useContext(DataContext);
-
-  useEffect(() => {}, [addedItems]);
 
   return (
     <>
