@@ -1,17 +1,43 @@
 import { Country } from "../Grid.interface";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { DataContext } from "../../../context/DataContext";
+import { useLocation } from "react-router-dom";
+
 const GridDetail: React.FC<{
   rowData: Country;
   close: boolean;
   setClose: (close: boolean) => void;
 }> = ({ rowData: rowData, close: close, setClose: setClose }) => {
   const { addedItems, setAddedItems } = useContext(DataContext);
-
+  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+  const location = useLocation();
   const addFavourites = () => {
     const updatedItem = [rowData, ...addedItems];
     setAddedItems(updatedItem);
     localStorage.setItem("favourites", JSON.stringify(updatedItem));
+    setIsFavourite(true);
+  };
+
+  const uniqueId = `${rowData?.name?.common}-${rowData?.name?.official}`;
+
+  useEffect(() => {
+    setIsFavourite(
+      addedItems.some(
+        (item) => `${item?.name?.common}-${item?.name?.official}` === uniqueId
+      )
+    );
+  }, [addedItems, uniqueId]);
+
+  const removeFavourites = () => {
+    const updatedItems = addedItems.filter((item) => {
+      const itemUniqueId = `${item?.name?.common}-${item?.name?.official}`;
+      return itemUniqueId !== uniqueId; // Remove only this item
+    });
+
+    setAddedItems(updatedItems);
+    localStorage.setItem("favourites", JSON.stringify(updatedItems));
+    setClose(true);
+    setIsFavourite(false);
   };
 
   useEffect(() => {
@@ -48,9 +74,23 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                <button className="btn btn-primary " onClick={addFavourites}>
-                  Favourite
-                </button>
+                {location?.pathname === "/search" && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={addFavourites}
+                    disabled={isFavourite}
+                  >
+                    {isFavourite ? "Favourited" : "Favourite"}
+                  </button>
+                )}
+                {location?.pathname === "/favourites" && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => removeFavourites()}
+                  >
+                    Delete
+                  </button>
+                )}
                 <button
                   className="btn btn-danger ms-3"
                   onClick={() => setClose(true)}
