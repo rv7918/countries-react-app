@@ -90,7 +90,7 @@ const GridViewList: React.FC<{ gridData }> = ({ gridData: gridData }) => {
 
   return (
     <>
-      <div className="ag-theme-quartz mt-5" style={{ height: 550 }}>
+      <div className="ag-theme-quartz-dark mt-5" style={{ height: 550 }}>
         <AgGridReact
           rowData={gridData}
           columnDefs={colDefs}

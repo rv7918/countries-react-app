@@ -1,0 +1,9 @@
+.cardBackground {
+    background-color: #d8d8d8!important;
+    min-height: 200px;
+}
+
+.flag {
+    width: 100%;
+    height: auto;
+}
