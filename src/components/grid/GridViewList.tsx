@@ -2,8 +2,12 @@ import { useMemo, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import GridDetail from "./gridDetail/GridDetail";
 
 const GridViewList: React.FC<{ gridData }> = ({ gridData: gridData }) => {
+  const [detail, setDetail] = useState();
+  const [close, setClose] = useState<boolean>(false);
+
   const defaultColDef = useMemo(() => {
     return {
       flex: 1,
@@ -79,23 +83,25 @@ const GridViewList: React.FC<{ gridData }> = ({ gridData: gridData }) => {
     },
   ]);
 
-  const onRowClick = (e) => {
-    console.log("row clicked", e.rowIndex);
+  const onRowClick = (params) => {
+    setDetail(params.data);
+    setClose(false);
   };
 
   return (
     <>
-      <div className="ag-theme-quartz mt-5" style={{ height: 650 }}>
+      <div className="ag-theme-quartz mt-5" style={{ height: 550 }}>
         <AgGridReact
           rowData={gridData}
           columnDefs={colDefs}
           defaultColDef={defaultColDef}
           pagination={true}
-          paginationPageSize={15}
-          paginationPageSizeSelector={[15, 30, 60, 100]}
+          paginationPageSize={10}
+          paginationPageSizeSelector={[10, 20, 50, 100]}
           onRowClicked={onRowClick}
         />
       </div>
+      <GridDetail rowData={detail} close={close} setClose={setClose} />
     </>
   );
 };
