@@ -1,17 +1,13 @@
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+import GridViewList from "../grid/GridViewList";
 
 const Favourites = () => {
   const { addedItems } = useContext(DataContext);
 
   return (
     <>
-      <button type="button" className="btn btn-primary position-relative mt-3">
-        Favourites
-        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          {addedItems?.length}
-        </span>
-      </button>
+      <GridViewList gridData={addedItems} />
     </>
   );
 };
