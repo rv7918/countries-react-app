@@ -1,4 +1,7 @@
+// import { DataContext } from "../../context/DataContext";
+// import { useContext } from "react";
 const Header: React.FC = () => {
+  //   const { name } = useContext(DataContext);
   return (
     <>
       <nav className="navbar navbar-light bg-light">

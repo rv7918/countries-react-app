@@ -1,22 +1,21 @@
 import { Country } from "../Grid.interface";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import { DataContext } from "../../../context/DataContext";
 const GridDetail: React.FC<{
   rowData: Country;
   close: boolean;
   setClose: (close: boolean) => void;
 }> = ({ rowData: rowData, close: close, setClose: setClose }) => {
-  // const [favArray, setFavArray] = useState([])
-  const [addedItems, setAddedItems] = useState([]);
+  const { addedItems, setAddedItems } = useContext(DataContext);
 
   const addFavourites = () => {
-    addedItems?.unshift(rowData);
-    localStorage.setItem("favourites", JSON.stringify(addedItems));
+    const updatedItem = [rowData, ...addedItems]; // Create a new array with the new item added
+    setAddedItems(updatedItem); // Update the state
+    localStorage.setItem("favourites", JSON.stringify(updatedItem)); // Sync to localStorage
   };
 
   useEffect(() => {
     setClose(true);
-    const storedItems = JSON.parse(localStorage.getItem("favourites")) ?? [];
-    setAddedItems(storedItems);
   }, [setClose]);
 
   return (
@@ -49,11 +48,7 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                <button
-                  className="btn btn-primary "
-                  onClick={addFavourites}
-                  disabled={addedItems?.includes(rowData)}
-                >
+                <button className="btn btn-primary " onClick={addFavourites}>
                   Favourite
                 </button>
                 <button
