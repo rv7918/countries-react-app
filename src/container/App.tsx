@@ -1,7 +1,7 @@
-import Header from "./components/header/Header";
-import GridViewModel from "./components/grid/GridViewModel";
-import Favourites from "./components/favourites/Favourites";
-import { DataProvider } from "./context/DataContext";
+import Header from "../components/header/Header";
+import GridViewModel from "../components/grid/GridViewModel";
+import Favourites from "../components/favourites/Favourites";
+import { DataProvider } from "../context/DataContext";
 import { Routes, Route } from "react-router-dom";
 import styles from "./App.module.css";
 
