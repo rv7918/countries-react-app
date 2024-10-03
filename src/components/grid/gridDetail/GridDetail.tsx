@@ -1,17 +1,25 @@
 import { Country } from "../Grid.interface";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { DataContext } from "../../../context/DataContext";
 const GridDetail: React.FC<{
   rowData: Country;
   close: boolean;
   setClose: (close: boolean) => void;
 }> = ({ rowData: rowData, close: close, setClose: setClose }) => {
+  const { addedItems, setAddedItems } = useContext(DataContext);
+
+  const addFavourites = () => {
+    const updatedItem = [rowData, ...addedItems]; // Create a new array with the new item added
+    setAddedItems(updatedItem); // Update the state
+    localStorage.setItem("favourites", JSON.stringify(updatedItem)); // Sync to localStorage
+  };
+
   useEffect(() => {
     setClose(true);
   }, [setClose]);
 
   return (
     <>
-      {console.log(rowData)}
       <div className="card mt-5 mb-5" style={{ height: "200px" }}>
         {close && (
           <div className="alert alert-light text-center" role="alert">
@@ -40,10 +48,7 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                <button
-                  className="btn btn-primary "
-                  onClick={() => setClose(true)}
-                >
+                <button className="btn btn-primary " onClick={addFavourites}>
                   Favourite
                 </button>
                 <button
