@@ -17,15 +17,17 @@ describe("GridViewModel tests", () => {
 
   const commonName = /South Georgia/i;
 
+  const renderComponent = (
+    <BrowserRouter>
+      <GridViewModel />
+    </BrowserRouter>
+  );
+
   it("Should test the components does not crash", () => {
     const div = document.createElement("div");
     act(() => {
       const root = createRoot(div);
-      root.render(
-        <BrowserRouter>
-          <GridViewModel />
-        </BrowserRouter>
-      );
+      root.render(renderComponent);
       root.unmount();
     });
     expect(div.innerHTML).toBe("");
@@ -33,11 +35,7 @@ describe("GridViewModel tests", () => {
 
   it("Should show the data from the table", async () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <GridViewModel />
-        </BrowserRouter>
-      );
+      render(renderComponent);
     });
 
     const countryName = await screen.findByText(commonName);
@@ -46,11 +44,7 @@ describe("GridViewModel tests", () => {
 
   it("Should show detail onClick", async () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <GridViewModel />
-        </BrowserRouter>
-      );
+      render(renderComponent);
     });
 
     const countryName = await screen.findByText(commonName);

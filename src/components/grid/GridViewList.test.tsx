@@ -18,15 +18,17 @@ describe("GridViewList tests", () => {
 
   const commonName = /Grenada/i;
 
+  const renderComponent = (
+    <BrowserRouter>
+      <GridViewList gridData={mainData} />
+    </BrowserRouter>
+  );
+
   it("Should test the components does not crash", () => {
     const div = document.createElement("div");
     act(() => {
       const root = createRoot(div);
-      root.render(
-        <BrowserRouter>
-          <GridViewList gridData={mainData} />
-        </BrowserRouter>
-      );
+      root.render(renderComponent);
       root.unmount();
     });
     expect(div.innerHTML).toBe("");
@@ -34,11 +36,7 @@ describe("GridViewList tests", () => {
 
   it("Should show the data from the table", async () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <GridViewList gridData={mainData} />
-        </BrowserRouter>
-      );
+      render(renderComponent);
     });
 
     const countryName = await screen.findByText(commonName);
@@ -47,11 +45,7 @@ describe("GridViewList tests", () => {
 
   it("Should show detail onClick", async () => {
     act(() => {
-      render(
-        <BrowserRouter>
-          <GridViewList gridData={mainData} />
-        </BrowserRouter>
-      );
+      render(renderComponent);
     });
 
     const countryName = await screen.findByText(commonName);
