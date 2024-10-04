@@ -39,3 +39,7 @@ Features:
 - Favourites persist across the application
 - Paginated grids
 - Filters
+
+![image](https://github.com/user-attachments/assets/fa3cde92-f6b3-4488-988f-bbd458d74250)
+
+![image](https://github.com/user-attachments/assets/349eb40f-d46a-4eeb-a666-f0d0bc11234d)
