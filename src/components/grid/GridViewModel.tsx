@@ -30,6 +30,7 @@ const GridViewModel: React.FC = () => {
 
   return (
     <>
+      <h3 className="mt-3 mb-3">Search</h3>
       {loading ? (
         <div className="mt-5">Loading...</div>
       ) : error ? (
