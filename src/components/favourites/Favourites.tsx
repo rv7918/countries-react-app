@@ -7,6 +7,7 @@ const Favourites = () => {
 
   return (
     <>
+      <h3 className="mt-3 mb-3">Favourites</h3>
       <GridViewList gridData={addedItems} />
     </>
   );
