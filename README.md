@@ -9,6 +9,7 @@ This app is built with
 - Jest
 - MSW
 - RTL
+- Vercel (Deployment)
 
 
 To run the app locally:
@@ -22,6 +23,8 @@ cd into the relevant dir
 `npm run dev`
 
 ## The application
+
+[Live preview](https://countries-react-app-eight.vercel.app)
 
 The user is able to search countries on the search tab by name, language, or currency without triggering a page reload. The App leverages the use of filters as searchs, this way a seperate search component is not needed and makes for a better user experience. 
 
