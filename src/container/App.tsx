@@ -5,7 +5,7 @@ import { DataProvider } from "../context/DataContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.css";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <>
       <DataProvider>

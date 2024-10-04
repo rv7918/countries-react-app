@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 import GridViewList from "../grid/GridViewList";
 
-const Favourites = () => {
+const Favourites: React.FC = () => {
   const { addedItems } = useContext(DataContext);
 
   return (
