@@ -75,7 +75,7 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                {location?.pathname === "/search" && (
+                {location?.pathname.includes("/search") && (
                   <button
                     className="btn btn-primary"
                     onClick={addFavourites}
@@ -84,7 +84,7 @@ const GridDetail: React.FC<{
                     {isFavourite ? "Favourited" : "Favourite"}
                   </button>
                 )}
-                {location?.pathname === "/favourites" && (
+                {location?.pathname.includes("/favourites") && (
                   <button
                     className="btn btn-primary"
                     onClick={() => removeFavourites()}
