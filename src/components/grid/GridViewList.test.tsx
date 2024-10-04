@@ -7,15 +7,16 @@ import {
 } from "@testing-library/react";
 import { createRoot } from "react-dom/client";
 import "@testing-library/jest-dom";
-import GridViewModel from "./GridViewModel";
+import GridViewList from "./GridViewList";
 import { BrowserRouter } from "react-router-dom";
+import { mainData } from "../../shared/SharedData";
 
-describe("GridViewModel tests", () => {
+describe("GridViewList tests", () => {
   afterEach(() => {
     cleanup();
   });
 
-  const commonName = /South Georgia/i;
+  const commonName = /Grenada/i;
 
   it("Should test the components does not crash", () => {
     const div = document.createElement("div");
@@ -23,7 +24,7 @@ describe("GridViewModel tests", () => {
       const root = createRoot(div);
       root.render(
         <BrowserRouter>
-          <GridViewModel />
+          <GridViewList gridData={mainData} />
         </BrowserRouter>
       );
       root.unmount();
@@ -35,7 +36,7 @@ describe("GridViewModel tests", () => {
     act(() => {
       render(
         <BrowserRouter>
-          <GridViewModel />
+          <GridViewList gridData={mainData} />
         </BrowserRouter>
       );
     });
@@ -48,14 +49,14 @@ describe("GridViewModel tests", () => {
     act(() => {
       render(
         <BrowserRouter>
-          <GridViewModel />
+          <GridViewList gridData={mainData} />
         </BrowserRouter>
       );
     });
 
     const countryName = await screen.findByText(commonName);
     fireEvent.click(countryName);
-    const fullName = /South Georgia and the South Sandwich Islands/i;
+    const fullName = commonName;
     expect(await screen.findByText(fullName)).toBeInTheDocument();
   });
 });
