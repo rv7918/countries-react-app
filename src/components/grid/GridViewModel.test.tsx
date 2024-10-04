@@ -16,6 +16,7 @@ describe("GridViewModel tests", () => {
   });
 
   const commonName = /South Georgia/i;
+  const fullName = /South Georgia and the South Sandwich Islands/i;
 
   const renderComponent = (
     <BrowserRouter>
@@ -42,14 +43,15 @@ describe("GridViewModel tests", () => {
     expect(countryName).toBeInTheDocument();
   });
 
-  it("Should show detail onClick", async () => {
+  it("Should close detail onClick", async () => {
     act(() => {
       render(renderComponent);
     });
-
     const countryName = await screen.findByText(commonName);
     fireEvent.click(countryName);
-    const fullName = /South Georgia and the South Sandwich Islands/i;
     expect(await screen.findByText(fullName)).toBeInTheDocument();
+    const closeBtn = screen.getByText(/close/i);
+    fireEvent.click(closeBtn);
+    expect(screen.queryByText(fullName)).not.toBeInTheDocument();
   });
 });
