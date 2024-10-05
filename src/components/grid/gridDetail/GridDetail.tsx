@@ -75,7 +75,7 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                {location?.pathname.includes("/search") && (
+                {location?.pathname.includes("/filter") && (
                   <button
                     className="btn btn-primary"
                     onClick={addFavourites}
