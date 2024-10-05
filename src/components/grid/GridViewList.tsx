@@ -4,7 +4,10 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import GridDetail from "./gridDetail/GridDetail";
 
-const GridViewList: React.FC<{ gridData }> = ({ gridData: gridData }) => {
+const GridViewList: React.FC<{ gridData; loading? }> = ({
+  gridData: gridData,
+  loading: loading,
+}) => {
   const [detail, setDetail] = useState();
   const [close, setClose] = useState<boolean>(false);
 
@@ -99,6 +102,7 @@ const GridViewList: React.FC<{ gridData }> = ({ gridData: gridData }) => {
           paginationPageSize={10}
           paginationPageSizeSelector={[10, 20, 50, 100]}
           onRowClicked={onRowClick}
+          loading={loading}
         />
       </div>
       <GridDetail rowData={detail} close={close} setClose={setClose} />

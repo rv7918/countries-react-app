@@ -4,6 +4,7 @@ import Favourites from "../components/favourites/Favourites";
 import { DataProvider } from "../context/DataContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.css";
+import Search from "../components/search/SearchViewModel";
 
 const App: React.FC = () => {
   return (
@@ -13,8 +14,9 @@ const App: React.FC = () => {
         <div className={`${styles?.body} container`}>
           <Routes>
             <Route path="/" element={<Navigate to="/search" />} />
-            <Route path="/search" element={<GridViewModel />} />
+            <Route path="/filter" element={<GridViewModel />} />
             <Route path="/favourites" element={<Favourites />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </div>
       </DataProvider>

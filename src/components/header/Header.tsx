@@ -22,6 +22,11 @@ const Header: React.FC = () => {
                 Search
               </button>
             </Link>
+            <Link to={"/filter"}>
+              <button className={`${styles?.search} btn btn-secondary btn-sm`}>
+                Filter
+              </button>
+            </Link>
             <Link to={"/favourites"}>
               <button className="btn btn-secondary position-relative btn-sm">
                 Favourites

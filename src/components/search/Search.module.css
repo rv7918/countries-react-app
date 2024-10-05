@@ -1,0 +1,3 @@
+.clear::-ms-clear {
+    display: none!important;
+}
