@@ -6,7 +6,7 @@ import {
   fireEvent,
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Search from "./SearchViewModel";
+import SearchViewModel from "./SearchViewModel";
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import App from "../../container/App";
@@ -18,7 +18,7 @@ describe("Search tests", () => {
 
   const renderSearch = (
     <BrowserRouter>
-      <Search />
+      <SearchViewModel />
     </BrowserRouter>
   );
 
