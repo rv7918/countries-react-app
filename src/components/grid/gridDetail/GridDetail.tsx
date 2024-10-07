@@ -32,7 +32,7 @@ const GridDetail: React.FC<{
   const removeFavourites = () => {
     const updatedItems = addedItems.filter((item) => {
       const itemUniqueId = `${item?.name?.common}-${item?.name?.official}`;
-      return itemUniqueId !== uniqueId; // Remove only this item
+      return itemUniqueId !== uniqueId;
     });
 
     setAddedItems(updatedItems);
@@ -44,6 +44,10 @@ const GridDetail: React.FC<{
   useEffect(() => {
     setClose(true);
   }, [setClose]);
+
+  const isPathMatching = ["/filter", "/search"].some((path) =>
+    location?.pathname?.includes(path)
+  );
 
   return (
     <>
@@ -75,7 +79,7 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                {location?.pathname.includes("/filter") && (
+                {isPathMatching && (
                   <button
                     className="btn btn-primary"
                     onClick={addFavourites}
