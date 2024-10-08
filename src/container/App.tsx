@@ -11,13 +11,15 @@ const App: React.FC = () => {
     <>
       <DataProvider>
         <Header />
-        <div className={`${styles?.body} container`}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/search" />} />
-            <Route path="/filter" element={<GridViewModel />} />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/search" element={<SearchViewModel />} />
-          </Routes>
+        <div className={styles?.body}>
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Navigate to="/search" />} />
+              <Route path="/filter" element={<GridViewModel />} />
+              <Route path="/favourites" element={<Favourites />} />
+              <Route path="/search" element={<SearchViewModel />} />
+            </Routes>
+          </div>
         </div>
       </DataProvider>
     </>

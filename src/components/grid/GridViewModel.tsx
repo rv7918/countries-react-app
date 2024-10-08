@@ -17,13 +17,13 @@ const GridViewModel: React.FC = () => {
       }
       setLoading(false);
     } catch (error) {
-      setError(error.message);
+      setError(error?.message);
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (gridData.length === 0) {
+    if (gridData?.length === 0) {
       getData();
     }
   }, [gridData]);
