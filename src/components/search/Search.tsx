@@ -1,11 +1,6 @@
+import React from "react";
 import styles from "./Search.module.css";
-
-interface ISearchProps {
-  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeValueOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
-  onClickSearch: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
+import { ISearchProps } from "./Search.interface";
 
 const Search: React.FC<ISearchProps> = ({
   onSearchChange,
@@ -54,4 +49,4 @@ const Search: React.FC<ISearchProps> = ({
   );
 };
 
-export default Search;
+export default React.memo(Search);
