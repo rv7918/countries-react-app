@@ -1,5 +1,5 @@
 import { searchQuery } from "./SearchModel";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import GridViewList from "../grid/GridViewList";
 import Search from "./Search";
 
@@ -8,33 +8,45 @@ const SearchViewModel = () => {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState<string>("name");
   const [value, setValue] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const searchQueryResult = async (query: string, value: string) => {
     setError(null);
     setData(null);
+    setLoading(true);
     try {
       const responseQuery = await searchQuery(query, value);
       setData(responseQuery);
     } catch (error) {
       setError(error?.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const onSearchChange = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
-    setValue(value);
-  };
+  const onSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      setValue(e.target.value);
+    },
+    []
+  );
 
-  const onClickSearch = () => {
-    return searchQueryResult(query, value);
-  };
+  const onClickSearch = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      return searchQueryResult(query, value);
+    },
+    [query, value]
+  );
 
-  const onChangeValueOption = (e) => {
-    e.preventDefault();
-    const returnValue = e.target.value;
-    setQuery(returnValue);
-  };
+  const onChangeValueOption = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      e.preventDefault();
+      setQuery(e.target.value);
+    },
+    []
+  );
 
   return (
     <>
@@ -47,7 +59,7 @@ const SearchViewModel = () => {
       />
       <br />
       {error && <div className="mt-2 mb-4">Error: {error}</div>}
-      <GridViewList gridData={data} loading={false} />
+      <GridViewList gridData={data} loading={loading} />
     </>
   );
 };
