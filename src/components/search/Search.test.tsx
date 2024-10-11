@@ -39,17 +39,21 @@ describe("Search tests", () => {
   });
 
   it("Should test input and submit", async () => {
-    render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-    const inputBox = screen.getByTestId("search-input") as HTMLInputElement;
+    act(() => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      );
+    });
+    const inputBox = (await screen.findByTestId(
+      "search-input"
+    )) as HTMLInputElement;
     fireEvent.change(inputBox, { target: { value: "Japan" } });
     expect(inputBox.value).toBe("Japan");
-    const submitBtn = screen.getByText(/submit/i);
+    const submitBtn = screen.queryByText(/submit/i);
     fireEvent.click(submitBtn);
-    const populationText = await screen.findByText("Japan");
+    const populationText = await screen.findByText(/Japanese yen/i);
     expect(populationText).toBeInTheDocument();
   });
 });

@@ -1,10 +1,34 @@
 import Header from "../components/header/Header";
-import GridViewModel from "../components/grid/GridViewModel";
-import Favourites from "../components/favourites/Favourites";
 import { DataProvider } from "../context/DataContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styles from "./App.module.css";
-import SearchViewModel from "../components/search/SearchViewModel";
+import { lazy, Suspense } from "react";
+import SuspenseLoader from "../components/loader/Loader";
+
+const GridViewModel = lazy(() => import("../components/grid/GridViewModel"));
+const Favourites = lazy(() => import("../components/favourites/Favourites"));
+const SearchViewModel = lazy(
+  () => import("../components/search/SearchViewModel")
+);
+
+const routes = [
+  {
+    path: "/",
+    element: <Navigate to="/search" />,
+  },
+  {
+    path: "filter",
+    element: <GridViewModel />,
+  },
+  {
+    path: "favourites",
+    element: <Favourites />,
+  },
+  {
+    path: "search",
+    element: <SearchViewModel />,
+  },
+];
 
 const App: React.FC = () => {
   return (
@@ -14,10 +38,24 @@ const App: React.FC = () => {
         <div className={styles?.body}>
           <div className="container">
             <Routes>
-              <Route path="/" element={<Navigate to="/search" />} />
-              <Route path="/filter" element={<GridViewModel />} />
-              <Route path="/favourites" element={<Favourites />} />
-              <Route path="/search" element={<SearchViewModel />} />
+              {routes.map(
+                (
+                  item: { path: string; element: JSX.Element },
+                  index: number
+                ) => {
+                  return (
+                    <Route
+                      key={index}
+                      path={item?.path}
+                      element={
+                        <Suspense fallback={<SuspenseLoader />}>
+                          {item.element}
+                        </Suspense>
+                      }
+                    />
+                  );
+                }
+              )}
             </Routes>
           </div>
         </div>

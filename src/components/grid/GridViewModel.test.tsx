@@ -50,7 +50,7 @@ describe("GridViewModel tests", () => {
     const countryName = await screen.findByText(commonName);
     fireEvent.click(countryName);
     expect(await screen.findByText(fullName)).toBeInTheDocument();
-    const closeBtn = screen.getByText(/close/i);
+    const closeBtn = screen.queryByText(/close/i);
     fireEvent.click(closeBtn);
     expect(screen.queryByText(fullName)).not.toBeInTheDocument();
   });
