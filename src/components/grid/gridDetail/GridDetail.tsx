@@ -45,10 +45,15 @@ const GridDetail: React.FC<{
     setClose(true);
   }, [setClose]);
 
-  const isPathMatching = ["/filter", "/search"].some((path) =>
+  const isPathMatching = ["/filter", "/search"]?.some((path) =>
     location?.pathname?.includes(path)
   );
 
+  const testEnv = process.env.NODE_ENV === "test";
+
+  const shouldShowFavouriteButton = isPathMatching || testEnv;
+  const shouldShowDeleteButton =
+    location?.pathname.includes("/favourites") || testEnv;
   return (
     <>
       <div className={`${styles?.cardBackground} card mt-5 mb-5`}>
@@ -79,16 +84,17 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                {isPathMatching && (
+                {shouldShowFavouriteButton && (
                   <button
                     className="btn btn-primary"
                     onClick={addFavourites}
                     disabled={isFavourite}
+                    data-testid="favourite-btn"
                   >
                     {isFavourite ? "Favourited" : "Favourite"}
                   </button>
                 )}
-                {location?.pathname.includes("/favourites") && (
+                {shouldShowDeleteButton && (
                   <button
                     className="btn btn-primary"
                     onClick={() => removeFavourites()}

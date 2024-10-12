@@ -27,7 +27,7 @@ const GridViewList: React.FC<{ gridData; loading? }> = ({
       headerName: "Currencies",
       flex: 1,
       valueGetter: (params) => {
-        const currencies = params.data.currencies;
+        const currencies = params?.data?.currencies;
         if (currencies && typeof currencies === "object") {
           return Object.keys(currencies)
             .map((key) => {
@@ -41,8 +41,8 @@ const GridViewList: React.FC<{ gridData; loading? }> = ({
       },
 
       comparator: (a, b, nodeA, nodeB) => {
-        const currenciesA = nodeA.data.currencies || {};
-        const currenciesB = nodeB.data.currencies || {};
+        const currenciesA = nodeA?.data?.currencies || {};
+        const currenciesB = nodeB?.data?.currencies || {};
 
         const currencyNamesA = Object.keys(currenciesA)
           .map((key) => currenciesA[key].name)
@@ -62,15 +62,15 @@ const GridViewList: React.FC<{ gridData; loading? }> = ({
       headerName: "Languages",
       flex: 1,
       valueGetter: (params) => {
-        const languages = params.data.languages;
+        const languages = params?.data?.languages;
         if (languages && typeof languages === "object") {
           return Object.values(languages).filter(Boolean).join(", ");
         }
         return "";
       },
       comparator: (a, b, nodeA, nodeB) => {
-        const languagesA = nodeA.data.languages || {};
-        const languagesB = nodeB.data.languages || {};
+        const languagesA = nodeA?.data?.languages || {};
+        const languagesB = nodeB?.data?.languages || {};
 
         const languageNamesA = Object.values(languagesA)
           .filter(Boolean)
@@ -87,7 +87,7 @@ const GridViewList: React.FC<{ gridData; loading? }> = ({
   ]);
 
   const onRowClick = (params) => {
-    setDetail(params.data);
+    setDetail(params?.data);
     setClose(false);
   };
 
