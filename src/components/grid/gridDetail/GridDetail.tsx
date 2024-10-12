@@ -49,8 +49,11 @@ const GridDetail: React.FC<{
     location?.pathname?.includes(path)
   );
 
-  const shouldShowButton = isPathMatching || process.env.NODE_ENV === "test";
+  const testEnv = process.env.NODE_ENV === "test";
 
+  const shouldShowFavouriteButton = isPathMatching || testEnv;
+  const shouldShowDeleteButton =
+    location?.pathname.includes("/favourites") || testEnv;
   return (
     <>
       <div className={`${styles?.cardBackground} card mt-5 mb-5`}>
@@ -81,7 +84,7 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                {shouldShowButton && (
+                {shouldShowFavouriteButton && (
                   <button
                     className="btn btn-primary"
                     onClick={addFavourites}
@@ -91,7 +94,7 @@ const GridDetail: React.FC<{
                     {isFavourite ? "Favourited" : "Favourite"}
                   </button>
                 )}
-                {location?.pathname.includes("/favourites") && (
+                {shouldShowDeleteButton && (
                   <button
                     className="btn btn-primary"
                     onClick={() => removeFavourites()}

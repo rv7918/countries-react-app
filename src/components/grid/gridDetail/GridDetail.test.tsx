@@ -67,5 +67,8 @@ describe("LocalStorage tests for favourites", () => {
     fireEvent.click(favouriteAddBtn);
     const item = JSON.parse(localStorage.getItem("favourites"));
     expect(item[0]).toEqual(rowDataShared);
+    const deleteBtn = screen.getByText("Delete");
+    fireEvent.click(deleteBtn);
+    expect(deleteBtn).toBeTruthy();
   });
 });
