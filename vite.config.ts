@@ -10,11 +10,11 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       exclude: [
-        ...configDefaults.exclude,  // Default exclusions
-        'src/mocks/*',              // Exclude the mocks folder
-        'src/main.tsx',             // Exclude main.tsx file
+        ...configDefaults.exclude,  
+        'src/mocks/*',              
+        'src/main.tsx',             
       ],
     },
-    exclude: [...configDefaults.exclude, 'src/mocks/*'],  // Test exclusions
+    exclude: [...configDefaults.exclude, 'src/mocks/*'],  
   },
 })
