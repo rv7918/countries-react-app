@@ -51,9 +51,9 @@ describe("Search tests", () => {
     )) as HTMLInputElement;
     fireEvent.change(inputBox, { target: { value: "Japan" } });
     expect(inputBox.value).toBe("Japan");
-    const submitBtn = screen.queryByText(/submit/i);
+    const submitBtn = await screen.getByText(/submit/i);
     fireEvent.click(submitBtn);
-    const populationText = await screen.findByText(/Japanese yen/i);
+    const populationText = await screen.findByText(/japanese yen/i);
     expect(populationText).toBeInTheDocument();
   });
 });
