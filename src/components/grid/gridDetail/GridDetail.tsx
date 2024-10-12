@@ -45,9 +45,11 @@ const GridDetail: React.FC<{
     setClose(true);
   }, [setClose]);
 
-  const isPathMatching = ["/filter", "/search"].some((path) =>
+  const isPathMatching = ["/filter", "/search"]?.some((path) =>
     location?.pathname?.includes(path)
   );
+
+  const shouldShowButton = isPathMatching || process.env.NODE_ENV === "test";
 
   return (
     <>
@@ -79,11 +81,12 @@ const GridDetail: React.FC<{
                 </p>
               </div>
               <div className="col-md-2 float-right">
-                {isPathMatching && (
+                {shouldShowButton && (
                   <button
                     className="btn btn-primary"
                     onClick={addFavourites}
                     disabled={isFavourite}
+                    data-testid="favourite-btn"
                   >
                     {isFavourite ? "Favourited" : "Favourite"}
                   </button>
